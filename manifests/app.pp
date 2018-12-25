@@ -14,6 +14,22 @@ node 'node1' {
          checksum_value => '2c393c035314864987df532f9f937afe'
     }
 }
+node 'node3' {
+
+    notify {"************NODE 3**************" : }
+    include prefs
+    include base
+    class {'::tomcat':
+        user   =>  'tomcat',
+        group  =>  'tomcat',
+        service_state => 'running',
+    }
+    
+    tomcat::deploy { 'sysfoo':
+         deploy_url => 'https://11-162922251-gh.circle-artifacts.com/0/tmp/sysfoo.war',
+         checksum_value => '2c393c035314864987df532f9f937afe'
+    }
+}
 
 node default {
      notify { "CHECKPOINT_1":
